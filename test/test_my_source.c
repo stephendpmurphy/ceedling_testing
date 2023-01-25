@@ -5,13 +5,14 @@
 
 int hal_cal_retVal = 0;
 
+// Mock function that we are going to redefine our "hal_reg_access" pointer with
 int myFunctionMock(int arg1, int arg2) {
     return hal_cal_retVal;
 }
 
 void test_ofStaticFunction_Passing(void) {
-    int (*oldFunctionPointer)(int, int) = myFunctionPointer;
-    myFunctionPointer = myFunctionMock;
+    int (*oldFunctionPointer)(int, int) = fptr_hal_reg_access;
+    fptr_hal_reg_access = myFunctionMock;
 
     // Set our pre-determined return val
     hal_cal_retVal = 0;
@@ -24,8 +25,8 @@ void test_ofStaticFunction_Passing(void) {
 }
 
 void test_ofStaticFunction_Failing(void) {
-    int (*oldFunctionPointer)(int, int) = myFunctionPointer;
-    myFunctionPointer = myFunctionMock;
+    int (*oldFunctionPointer)(int, int) = fptr_hal_reg_access;
+    fptr_hal_reg_access = myFunctionMock;
 
     // Set our pre-determined return val
     hal_cal_retVal = 1;
