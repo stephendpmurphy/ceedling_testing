@@ -11,3 +11,7 @@ int hal_reg_access(int arg1, int arg2) {
 
     return 0;
 }
+
+int hal_returnReg(int arg1) {
+    return arg1;
+}

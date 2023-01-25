@@ -10,3 +10,7 @@ static int myStaticFunction(int arg1, int arg2) {
     // things.
     return (*fptr_hal_reg_access)(arg1, arg2);
 }
+
+int anotherPublicFunction(int arg1) {
+    return hal_returnReg(arg1);
+}

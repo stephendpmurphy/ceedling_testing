@@ -1,7 +1,6 @@
 #include "unity.h"
-#include "hal.h"
+#include "mock_hal.h"
 #include "my_source.c"
-#include <stdio.h>
 
 int hal_cal_retVal = 0;
 
@@ -48,4 +47,31 @@ void test_ofStaticFunction_Failing(void) {
 
     // Restore the function pointer to the original function
     fptr_hal_reg_access = oldFunctionPointer;
+}
+
+// Example of mocking a function normally
+void test_ofNormalMockedFunction_Passing(void) {
+    int result = -1;
+
+    // Mock the hal call inside of our public function
+    hal_returnReg_IgnoreAndReturn(0);
+
+    // Call our public function
+    result = anotherPublicFunction(0);
+
+    // Verify the result
+    TEST_ASSERT_EQUAL(0, result);
+}
+
+void test_ofNormalMockedFunction_Failing(void) {
+    int result = -1;
+
+    // Mock the hal call inside of our public function
+    hal_returnReg_IgnoreAndReturn(1);
+
+    // Call our public function
+    result = anotherPublicFunction(0);
+
+    // Verify the result
+    TEST_ASSERT_EQUAL(0, result);
 }
