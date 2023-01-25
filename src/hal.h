@@ -1,6 +1,6 @@
-#ifndef MY_HEADER_H
-#define MY_HEADER_H
+#ifndef HAL_H
+#define HAL_H
 
-int myFunction(int arg1, int arg2);
+int hal_reg_access(int arg1, int arg2);
 
 #endif
