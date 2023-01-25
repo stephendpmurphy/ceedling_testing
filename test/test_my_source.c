@@ -11,7 +11,10 @@ int myFunctionMock(int arg1, int arg2) {
 }
 
 void test_ofStaticFunction_Passing(void) {
+    // Store a reference to the original function
     int (*oldFunctionPointer)(int, int) = fptr_hal_reg_access;
+
+    // Re-assign the fptr (essentially mocking)
     fptr_hal_reg_access = myFunctionMock;
 
     // Set our pre-determined return val
@@ -22,10 +25,16 @@ void test_ofStaticFunction_Passing(void) {
 
     // Verify the result
     TEST_ASSERT_EQUAL(0, result);
+
+    // Restore the function pointer to the original function
+    fptr_hal_reg_access = oldFunctionPointer;
 }
 
 void test_ofStaticFunction_Failing(void) {
+    // Store a reference to the original function
     int (*oldFunctionPointer)(int, int) = fptr_hal_reg_access;
+
+    // Re-assign the fptr (essentially mocking)
     fptr_hal_reg_access = myFunctionMock;
 
     // Set our pre-determined return val
@@ -36,4 +45,7 @@ void test_ofStaticFunction_Failing(void) {
 
     // Verify the result
     TEST_ASSERT_EQUAL(0, result);
+
+    // Restore the function pointer to the original function
+    fptr_hal_reg_access = oldFunctionPointer;
 }
